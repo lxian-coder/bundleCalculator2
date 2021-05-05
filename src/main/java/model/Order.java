@@ -13,6 +13,4 @@ import java.util.List;
 @Getter
 public class Order {
     List<OrderItem> orderItemList = new ArrayList<>();
-
-
 }

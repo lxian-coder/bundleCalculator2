@@ -14,5 +14,5 @@ import java.util.Map;
 public class FilledOrderItem {
     private String formatCode;
     private int inpuPosts;
-    private Map<Integer,Map<Integer, BigDecimal>>  bundledPosts;
+    private Map<Integer, Map<Integer, BigDecimal>> bundledPosts;
 }

@@ -4,7 +4,6 @@ import model.FilledOrder;
 import model.Order;
 import userInput.UserInput;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,14 +15,13 @@ public class BundleCalculatorApp {
 
         Map<String, Map<String, String>> bundlesFormatMap = new BundlesFormatBootstrap().createFormatsMap();
 
-        List<String> inputList =  new UserInput(bundlesFormatMap).getInputData();
+        List<String> inputList = new UserInput(bundlesFormatMap).getInputData();
 
         Order order = new OrderParser().parser(inputList);
 
-        FilledOrder filledOrder = new OrderFiller(new Calculator(),bundlesFormatMap).fillTheOrder(order);
+        FilledOrder filledOrder = new OrderFiller(new Calculator(), bundlesFormatMap).fillTheOrder(order);
 
         filledOrder.toString();
-
 
 
     }

@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -19,52 +18,48 @@ public class OrderFiller {
     private final Calculator calculator;
     private final Map<String, Map<String, String>> bundlesFormatMap;
 
-    public FilledOrder fillTheOrder(Order order){
+    public FilledOrder fillTheOrder(Order order) {
         FilledOrder filledOrder = new FilledOrder();
 
-          order.getOrderItemList().forEach(orderItem -> {
+        order.getOrderItemList().forEach(orderItem -> {
+            String formatCode = orderItem.getFormatCode();
+            List<Integer> bundlesSet = bundlesFormatMap.get(formatCode).keySet()
+                    .stream()
+                    .map(e -> Integer.parseInt(e))
+                    .collect(Collectors.toList());
 
-          String formatCode = orderItem.getFormatCode();
-          List<Integer> bundlesSet = bundlesFormatMap.get(formatCode).keySet()
-                                      .stream()
-                                      .map(e->Integer.parseInt(e))
-                                     .collect(Collectors.toList());
+            Map<Integer, Integer> bundleBreakDownMap = calculator.getBundleBreakDownMap(orderItem.getPosts(), bundlesSet);
+            Map<Integer, Map<Integer, BigDecimal>> bundledPosts = addPriceToBundleBreakDownMap(bundleBreakDownMap, formatCode);
+            FilledOrderItem filledOrderItem = new FilledOrderItem();
+            filledOrderItem.setBundledPosts(bundledPosts);
+            filledOrderItem.setInpuPosts(orderItem.getPosts());
+            filledOrderItem.setFormatCode(formatCode);
+            filledOrder.getFilledOrderItemList().add(filledOrderItem);
+        });
 
-        Map<Integer,Integer> bundleBreakDownMap =  calculator.getBundleBreakDownMap(orderItem.getPosts(),bundlesSet);
-        Map<Integer,Map<Integer,BigDecimal>> bundledPosts = addPriceToBundleBreakDownMap(bundleBreakDownMap,formatCode);
-        FilledOrderItem filledOrderItem = new FilledOrderItem();
-        filledOrderItem.setBundledPosts(bundledPosts);
-        filledOrderItem.setInpuPosts(orderItem.getPosts());
-        filledOrderItem.setFormatCode(formatCode);
-        filledOrder.getFilledOrderItemList().add(filledOrderItem);
-         });
-
-    return filledOrder;
+        return filledOrder;
     }
 
-    private Map<Integer,Map<Integer, BigDecimal>> addPriceToBundleBreakDownMap(Map<Integer,Integer> bundleBreakMap, String formatCode){
+    private Map<Integer, Map<Integer, BigDecimal>> addPriceToBundleBreakDownMap(Map<Integer, Integer> bundleBreakMap, String formatCode) {
+        Map<Integer, Map<Integer, BigDecimal>> resultMap = new HashMap<>();
+        List<String> bundles = bundlesFormatMap.get(formatCode).keySet().stream().collect(Collectors.toList());
 
-        Map<Integer,Map<Integer,BigDecimal>> resultMap = new HashMap<>();
-        List<String> bundles =   bundlesFormatMap.get(formatCode).keySet().stream().collect(Collectors.toList());
+        bundles.forEach(bundle -> {
+            Map<Integer, BigDecimal> subMap = new HashMap<>();
+            String stringPrice = bundlesFormatMap.get(formatCode).get(bundle);
+            BigDecimal price = new BigDecimal(stringPrice);
+            Integer intBundle = Integer.parseInt(bundle);
+            Integer cal = bundleBreakMap.get(intBundle);
+            if (cal != null) {
+                subMap.put(bundleBreakMap.get(intBundle), price);
+                resultMap.put(intBundle, subMap);
+            }
 
-       bundles.forEach(bundle->{
-           Map<Integer,BigDecimal> subMap = new HashMap<>();
-           String stringPrice = bundlesFormatMap.get(formatCode).get(bundle);
-           BigDecimal price = new BigDecimal(stringPrice);
-           Integer intBundle = Integer.parseInt(bundle);
-           Integer cal = bundleBreakMap.get(intBundle);
-           if(cal != null){
-               subMap.put(bundleBreakMap.get(intBundle),price);
-               resultMap.put(intBundle,subMap);
-           }
+        });
 
-       });
-
-       return resultMap;
+        return resultMap;
 
     }
-
-
 
 
 }

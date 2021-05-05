@@ -1,14 +1,12 @@
 package calculator;
 
-import model.FilledOrderItem;
-
 import java.util.*;
 
 /**
  * Darcy Xian  5/5/21  12:46 pm      bundleCalculator
  */
 public class Calculator {
-    public Map<Integer,Integer> getBundleBreakDownMap(int posts, List<Integer> bundles) {
+    public Map<Integer, Integer> getBundleBreakDownMap(int posts, List<Integer> bundles) {
 
         boolean calculationFaile;
         int changedPosts = posts;

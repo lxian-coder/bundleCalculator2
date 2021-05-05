@@ -19,29 +19,24 @@ public class FilledOrder {
     List<FilledOrderItem> filledOrderItemList = new ArrayList<>();
 
     @Override
-    public String toString(){
+    public String toString() {
 
-      for(FilledOrderItem filledOrderItem : filledOrderItemList){
-          List<String> displayPrice = new ArrayList<>();
-          BigDecimal priceSum = new BigDecimal(0);
-
-          Map<Integer,Map<Integer,BigDecimal>> itemMap = filledOrderItem.getBundledPosts();
-           List<Integer> keySet = itemMap.keySet().stream().collect(Collectors.toList());
-
-           for(Integer bundle : keySet){
-             Map<Integer,BigDecimal> calMap = itemMap.get(bundle);
-               Integer cal = calMap.keySet().iterator().next();
+        for (FilledOrderItem filledOrderItem : filledOrderItemList) {
+            List<String> displayPrice = new ArrayList<>();
+            BigDecimal priceSum = new BigDecimal(0);
+            Map<Integer, Map<Integer, BigDecimal>> itemMap = filledOrderItem.getBundledPosts();
+            List<Integer> keySet = itemMap.keySet().stream().collect(Collectors.toList());
+            for (Integer bundle : keySet) {
+                Map<Integer, BigDecimal> calMap = itemMap.get(bundle);
+                Integer cal = calMap.keySet().iterator().next();
                 BigDecimal price = calMap.get(cal);
                 BigDecimal bundlePrice = price.multiply(new BigDecimal(cal));
                 priceSum = priceSum.add(bundlePrice);
-               String s ="   "+cal+" X "+bundle + "  $"+ bundlePrice;
-               displayPrice.add(s);
-           }
-           System.out.println(filledOrderItem.getInpuPosts() + " " + filledOrderItem.getFormatCode() + " $"+priceSum);
-           displayPrice.stream().forEach(s -> System.out.println(s));
-
-
-
+                String s = "   " + cal + " X " + bundle + "  $" + bundlePrice;
+                displayPrice.add(s);
+            }
+            System.out.println(filledOrderItem.getInpuPosts() + " " + filledOrderItem.getFormatCode() + " $" + priceSum);
+            displayPrice.stream().forEach(s -> System.out.println(s));
         };
         return null;
     }
