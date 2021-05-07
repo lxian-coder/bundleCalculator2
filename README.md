@@ -33,3 +33,4 @@ This Bundle Calculator can accept your orders and calculate the bundles and mone
 * Lombok
 * Slf4j
 * Java 8
+* Manifold
