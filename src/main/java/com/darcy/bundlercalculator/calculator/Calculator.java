@@ -64,7 +64,4 @@ public class Calculator {
         }
         return bundleBreakDownMap;
     }
-    private int addOne(){
-        return 2;
-    }
 }
