@@ -39,7 +39,6 @@ public class OrderFiller {
             filledOrderItem.setFormatCode(formatCode);
             filledOrder.getFilledOrderItemList().add(filledOrderItem);
         });
-
         return filledOrder;
     }
 

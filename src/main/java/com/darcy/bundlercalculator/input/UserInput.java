@@ -61,7 +61,7 @@ public class UserInput {
         return true;
     }
 
-    public boolean isStrToNum(String str) {
+    private boolean isStrToNum(String str) {
         try {
             Integer.parseInt(str);
             return true;

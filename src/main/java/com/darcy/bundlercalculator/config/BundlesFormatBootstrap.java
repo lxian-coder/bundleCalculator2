@@ -1,8 +1,5 @@
 package com.darcy.bundlercalculator.config;
 
-
-import lombok.RequiredArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +9,6 @@ import java.util.Map;
  * Darcy Xian  4/5/21  3:47 pm      bundleCalculator
  */
 
-@RequiredArgsConstructor
 public class BundlesFormatBootstrap {
 
     public Map<String, Map<String, String>> createFormatsMap() {

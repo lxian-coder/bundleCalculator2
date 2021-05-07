@@ -6,23 +6,23 @@ import java.util.*;
  * Darcy Xian  5/5/21  12:46 pm      bundleCalculator
  */
 public class Calculator {
+
     public Map<Integer, Integer> getBundleBreakDownMap(int posts, List<Integer> bundles) {
 
-        boolean calculationFail;
+        boolean calculationFail = true;
+        Map<Integer, Integer> bundleBreakDownMap = new HashMap<>();
         int changedPosts = posts;
         bundles.sort(Comparator.reverseOrder());
-        Map<Integer, Integer> bundleBreakDownMap;
-        bundleBreakDownMap = getBundleBreakdownMap(bundles, posts);
-        calculationFail = bundleBreakDownMap.containsKey(-1);
+
         while (calculationFail) {
             changedPosts++;
-            bundleBreakDownMap = getBundleBreakdownMap(bundles, changedPosts);
+            bundleBreakDownMap = getBundleBreakdownHelper(bundles, changedPosts);
             calculationFail = bundleBreakDownMap.containsKey(-1);
         }
         return bundleBreakDownMap;
     }
 
-    private Map<Integer, Integer> getBundleBreakdownMap(List<Integer> descendingBundles, int posts) {
+    private Map<Integer, Integer> getBundleBreakdownHelper(List<Integer> descendingBundles, int posts) {
         int bundlesSize = descendingBundles.size();
         Map<Integer, Integer> bundleBreakDownMap = new HashMap<>();
         Iterator<Integer> it = descendingBundles.iterator();
@@ -48,9 +48,7 @@ public class Calculator {
 
         for (int i = 0; i < descendingBundles.size(); i++) {
             bundle = it.next();
-            if (postsInt / bundle > 0) {
-                bundleBreakDownMap.put(bundle, postsInt / bundle);
-            }
+            if (postsInt / bundle > 0) bundleBreakDownMap.put(bundle, postsInt / bundle);
             if (postsInt % bundle == 0) {
                 postsInt = 0;
                 break;
@@ -65,5 +63,8 @@ public class Calculator {
             return bundleBreakDownMap;
         }
         return bundleBreakDownMap;
+    }
+    private int addOne(){
+        return 2;
     }
 }
