@@ -33,7 +33,6 @@ public class CalculatorTest {
     @Test
     public void shouldReturnFailedMapGivenCalculationFailed() {
         int posts = 4;
-        System.out.println(descendingBundles);
         Map<Integer, Integer> result = calculator.getBundleBreakdownMapCalculator(descendingBundles, posts);
         assertTrue(result.containsKey(-1));
         assertEquals(1, result.get(-1));
