@@ -1,4 +1,4 @@
-package bundleFormatConfig;
+package com.darcy.bundlercalculator.config;
 
 
 import lombok.RequiredArgsConstructor;
@@ -17,10 +17,8 @@ public class BundlesFormatBootstrap {
 
     public Map<String, Map<String, String>> createFormatsMap() {
         List<BundlesFormat> formats = loadData();
-        Map<String, Map<String, String>> formatsMap = new HashMap<String, Map<String, String>>();
-        formats.forEach(dataModel -> {
-            formatsMap.put(dataModel.getFormatCode().toLowerCase(), dataModel.getBundles());
-        });
+        Map<String, Map<String, String>> formatsMap = new HashMap<>();
+        formats.forEach(dataModel -> formatsMap.put(dataModel.getFormatCode().toLowerCase(), dataModel.getBundles()));
         return formatsMap;
     }
 

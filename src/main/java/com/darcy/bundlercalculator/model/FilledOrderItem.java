@@ -1,4 +1,4 @@
-package model;
+package com.darcy.bundlercalculator.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +13,6 @@ import java.util.Map;
 @Setter
 public class FilledOrderItem {
     private String formatCode;
-    private int inpuPosts;
+    private int inputPosts;
     private Map<Integer, Map<Integer, BigDecimal>> bundledPosts;
 }

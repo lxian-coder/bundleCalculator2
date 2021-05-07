@@ -1,4 +1,4 @@
-package userInput;
+package com.darcy.bundlercalculator.input;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,15 +26,15 @@ public class UserInput {
         System.out.println("Please input Data (case insensitive and double click Enter to finish input): ");
         Scanner s = new Scanner(System.in);
         int i = 0;
-        String inputString = " ";
+        StringBuilder inputString = new StringBuilder(" ");
         while (true) {
             i++;
             String line2 = s.nextLine().toLowerCase();
-            inputString += " " + line2;
+            inputString.append(" ").append(line2);
             if (line2.length() == 0 && i != 1) break;
         }
-        List<String> inputList = new ArrayList<String>(Arrays.asList(inputString.split(" ")));
-        inputList.removeAll(Arrays.asList(""));
+        List<String> inputList = new ArrayList<>(Arrays.asList(inputString.toString().split(" ")));
+        inputList.removeAll(Collections.singletonList(""));
         return inputList;
     }
 

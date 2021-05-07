@@ -1,10 +1,13 @@
-import calculator.Calculator;
+package com.darcy.bundlercalculator;
+
+import com.darcy.bundlercalculator.calculator.Calculator;
 import lombok.RequiredArgsConstructor;
-import model.FilledOrder;
-import model.FilledOrderItem;
-import model.Order;
+import com.darcy.bundlercalculator.model.FilledOrder;
+import com.darcy.bundlercalculator.model.FilledOrderItem;
+import com.darcy.bundlercalculator.model.Order;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +28,14 @@ public class OrderFiller {
             String formatCode = orderItem.getFormatCode();
             List<Integer> bundlesSet = bundlesFormatMap.get(formatCode).keySet()
                     .stream()
-                    .map(e -> Integer.parseInt(e))
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
 
             Map<Integer, Integer> bundleBreakDownMap = calculator.getBundleBreakDownMap(orderItem.getPosts(), bundlesSet);
             Map<Integer, Map<Integer, BigDecimal>> bundledPosts = addPriceToBundleBreakDownMap(bundleBreakDownMap, formatCode);
             FilledOrderItem filledOrderItem = new FilledOrderItem();
             filledOrderItem.setBundledPosts(bundledPosts);
-            filledOrderItem.setInpuPosts(orderItem.getPosts());
+            filledOrderItem.setInputPosts(orderItem.getPosts());
             filledOrderItem.setFormatCode(formatCode);
             filledOrder.getFilledOrderItemList().add(filledOrderItem);
         });
@@ -42,7 +45,7 @@ public class OrderFiller {
 
     private Map<Integer, Map<Integer, BigDecimal>> addPriceToBundleBreakDownMap(Map<Integer, Integer> bundleBreakMap, String formatCode) {
         Map<Integer, Map<Integer, BigDecimal>> resultMap = new HashMap<>();
-        List<String> bundles = bundlesFormatMap.get(formatCode).keySet().stream().collect(Collectors.toList());
+        List<String> bundles = new ArrayList<>(bundlesFormatMap.get(formatCode).keySet());
 
         bundles.forEach(bundle -> {
             Map<Integer, BigDecimal> subMap = new HashMap<>();
@@ -54,7 +57,6 @@ public class OrderFiller {
                 subMap.put(bundleBreakMap.get(intBundle), price);
                 resultMap.put(intBundle, subMap);
             }
-
         });
 
         return resultMap;

@@ -1,4 +1,4 @@
-package bundleFormatConfig;
+package com.darcy.bundlercalculator.config;
 
 import lombok.Getter;
 import lombok.Setter;

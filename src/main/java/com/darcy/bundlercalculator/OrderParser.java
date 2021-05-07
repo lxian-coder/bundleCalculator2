@@ -1,5 +1,7 @@
-import model.Order;
-import model.OrderItem;
+package com.darcy.bundlercalculator;
+
+import com.darcy.bundlercalculator.model.Order;
+import com.darcy.bundlercalculator.model.OrderItem;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package calculator;
+package com.darcy.bundlercalculator.calculator;
 
 import java.util.*;
 
@@ -8,16 +8,16 @@ import java.util.*;
 public class Calculator {
     public Map<Integer, Integer> getBundleBreakDownMap(int posts, List<Integer> bundles) {
 
-        boolean calculationFaile;
+        boolean calculationFail;
         int changedPosts = posts;
         bundles.sort(Comparator.reverseOrder());
         Map<Integer, Integer> bundleBreakDownMap;
         bundleBreakDownMap = getBundleBreakdownMap(bundles, posts);
-        calculationFaile = bundleBreakDownMap.containsKey(-1);
-        while (calculationFaile) {
+        calculationFail = bundleBreakDownMap.containsKey(-1);
+        while (calculationFail) {
             changedPosts++;
             bundleBreakDownMap = getBundleBreakdownMap(bundles, changedPosts);
-            calculationFaile = bundleBreakDownMap.containsKey(-1);
+            calculationFail = bundleBreakDownMap.containsKey(-1);
         }
         return bundleBreakDownMap;
     }
@@ -42,12 +42,12 @@ public class Calculator {
 
     private Map<Integer, Integer> getBundleBreakdownMapCalculator(List<Integer> descendingBundles, int posts) {
         int postsInt = posts;
-        int bundle = 0;
+        int bundle;
         Map<Integer, Integer> bundleBreakDownMap = new HashMap<>();
         Iterator<Integer> it = descendingBundles.iterator();
 
         for (int i = 0; i < descendingBundles.size(); i++) {
-            bundle = it.next().intValue();
+            bundle = it.next();
             if (postsInt / bundle > 0) {
                 bundleBreakDownMap.put(bundle, postsInt / bundle);
             }

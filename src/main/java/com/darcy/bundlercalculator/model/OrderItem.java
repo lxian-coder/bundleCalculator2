@@ -1,4 +1,4 @@
-package model;
+package com.darcy.bundlercalculator.model;
 
 import lombok.Getter;
 import lombok.Setter;
