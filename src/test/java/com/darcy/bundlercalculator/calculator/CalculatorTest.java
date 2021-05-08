@@ -69,7 +69,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void shouldReturnSuccessMapEventuallyGivenIfPostsCanNotBeBundledThenBeAddedOneAndTryAgain() {
+    public void shouldReturnSuccessMapEventuallyGivenPostsCanNotBeBundled() {
         int posts = 4;
         Map<Integer, Integer> testResult = calculator.getBundleBreakDownMap(posts, descendingBundles);
 
