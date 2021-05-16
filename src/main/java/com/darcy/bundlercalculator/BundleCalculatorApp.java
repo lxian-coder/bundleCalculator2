@@ -2,10 +2,9 @@ package com.darcy.bundlercalculator;
 
 import com.darcy.bundlercalculator.calculator.Calculator;
 import com.darcy.bundlercalculator.config.BundlesFormatBootstrap;
-
+import com.darcy.bundlercalculator.input.UserInput;
 import com.darcy.bundlercalculator.model.FilledOrder;
 import com.darcy.bundlercalculator.model.Order;
-import com.darcy.bundlercalculator.input.UserInput;
 
 import java.util.List;
 import java.util.Map;

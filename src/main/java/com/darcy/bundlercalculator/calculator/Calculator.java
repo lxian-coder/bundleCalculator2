@@ -9,15 +9,15 @@ public class Calculator {
 
     public Map<Integer, Integer> getBundleBreakDownMap(int posts, List<Integer> bundles) {
 
-        boolean calculationFail = true;
+        boolean calculationUnfinished = true;
         Map<Integer, Integer> bundleBreakDownMap = new HashMap<>();
         int changedPosts = posts;
         bundles.sort(Comparator.reverseOrder());
 
-        while (calculationFail) {
+        while (calculationUnfinished) {
             changedPosts++;
             bundleBreakDownMap = getBundleBreakdownHelper(bundles, changedPosts);
-            calculationFail = bundleBreakDownMap.containsKey(-1);
+            calculationUnfinished = bundleBreakDownMap.containsKey(-1);
         }
         return bundleBreakDownMap;
     }

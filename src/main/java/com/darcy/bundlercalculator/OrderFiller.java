@@ -1,10 +1,10 @@
 package com.darcy.bundlercalculator;
 
 import com.darcy.bundlercalculator.calculator.Calculator;
-import lombok.RequiredArgsConstructor;
 import com.darcy.bundlercalculator.model.FilledOrder;
 import com.darcy.bundlercalculator.model.FilledOrderItem;
 import com.darcy.bundlercalculator.model.Order;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -49,8 +49,8 @@ public class OrderFiller {
         bundles.forEach(bundle -> {
             Map<Integer, BigDecimal> subMap = new HashMap<>();
             String stringPrice = bundlesFormatMap.get(formatCode).get(bundle);
-            BigDecimal price = new BigDecimal(stringPrice);
             Integer intBundle = Integer.parseInt(bundle);
+            BigDecimal price = new BigDecimal(stringPrice).multiply(new BigDecimal(intBundle));
             Integer cal = bundleBreakMap.get(intBundle);
             if (cal != null) {
                 subMap.put(bundleBreakMap.get(intBundle), price);
