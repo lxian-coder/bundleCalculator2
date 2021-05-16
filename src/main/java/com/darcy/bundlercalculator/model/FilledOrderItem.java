@@ -31,7 +31,6 @@ public class FilledOrderItem {
             String s = "   " + quality + " X " + key + "  $" + price;
             displayPrice.add(s);
         }
-        ;
         System.out.println(inputPosts + " " + formatCode + " $" + priceSum);
         displayPrice.forEach(System.out::println);
         return null;
